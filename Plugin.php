@@ -28,7 +28,12 @@ class Plugin extends Base
         });
 
         $this->container->extend('taskLexer', function($taskLexer, $c) {
-            $taskLexer->withFilter(TaskBoardDateFilter::getInstance($c)->setDateParser($c['dateParser']));
+            $taskLexer
+                ->withFilter(
+                    TaskBoardDateFilter::getInstance($c)->setDateParser($c['dateParser'])
+                )
+                ->withFilter(new TaskBoardDateRangeFilter());
+
             return $taskLexer;
         });
     }
@@ -46,7 +51,7 @@ class Plugin extends Base
 
     public function applyDateFilter(Table $query)
     {
-        $query->lte(TaskModel::TABLE.'.date_board', time());
+        //$query->lte(TaskModel::TABLE.'.date_board', time());
     }
 
     public function getPluginName()
