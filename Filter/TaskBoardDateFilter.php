@@ -23,7 +23,7 @@ class TaskBoardDateFilter extends BaseDateFilter implements FilterInterface
      */
     public function getAttributes()
     {
-        return array('board_date');
+        return array('board_date','wv');
     }
 
     /**
